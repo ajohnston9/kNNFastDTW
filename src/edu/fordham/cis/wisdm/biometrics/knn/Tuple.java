@@ -19,6 +19,16 @@ public class Tuple {
         this.z = z;
     }
 
+    /**
+     * To make using the TimeSeriesPoint constructor easy, this returns
+     * @return
+     */
+    public double[] toDoubleArray() {
+        double[] arr = {x, y, z};
+        return arr;
+    }
+
+
     public long getTimestamp() {
         return timestamp;
     }
@@ -50,4 +60,5 @@ public class Tuple {
     public void setZ(float z) {
         this.z = z;
     }
+
 }

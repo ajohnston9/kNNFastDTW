@@ -20,6 +20,9 @@ public class Window {
         return tuples.get(index);
     }
 
+    public ArrayList<Tuple> getTuples() {
+        return tuples;
+    }
 
     public int getDmClass() {
         return dmClass;
