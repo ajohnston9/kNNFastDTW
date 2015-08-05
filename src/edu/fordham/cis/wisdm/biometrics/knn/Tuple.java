@@ -1,4 +1,4 @@
-package edu.fordham.cis.biometrics.knn;
+package edu.fordham.cis.wisdm.biometrics.knn;
 
 /**
  * Represents a sensor reading in three axes at one point in time. Assumes timestamps are UNIX-style.

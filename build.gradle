@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'gradle-one-jar'
+
+group = 'edu.fordham.cis.wisdm.biometrics.knn'
+version = '0.01ALPHA'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
+}
+
+task createJar(type: OneJar) {
+    mainClass = 'edu.fordham.cis.wisdm.biometrics.knn.Main'
+    archiveName = 'kNN-with-FastDTW.jar'
+}
+
+repositories {
+
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+dependencies {
+    //TODO: Add dependencies
+}
+

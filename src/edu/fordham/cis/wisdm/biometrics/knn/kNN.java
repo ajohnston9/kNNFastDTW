@@ -1,4 +1,4 @@
-package edu.fordham.cis.biometrics.knn;
+package edu.fordham.cis.wisdm.biometrics.knn;
 
 import java.util.*;
 

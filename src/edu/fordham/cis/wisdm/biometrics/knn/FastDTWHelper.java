@@ -1,4 +1,4 @@
-package edu.fordham.cis.biometrics.knn;
+package edu.fordham.cis.wisdm.biometrics.knn;
 
 /**
  * Used to convert the internal representation of data as Window objects into TimeSeriesPoint and TimeSeries

@@ -1,4 +1,4 @@
-package edu.fordham.cis.biometrics.knn;
+package edu.fordham.cis.wisdm.biometrics.knn;
 
 /**
  * Created by andrew on 8/4/15.
