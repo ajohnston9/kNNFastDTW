@@ -10,20 +10,55 @@ import java.util.*;
  */
 public class kNN {
 
+    /**
+     * The examples that are in the algorithm's "memory" and will be used for prediciting the class of new
+     * users.
+     */
     private ArrayList<Window> trainedExamples = new ArrayList<>();
+
+    /**
+     * The number of neighbors to check
+     */
     private int k = 1;
 
+    /**
+     * Initialize the kNN scheme as Nearest-Neighbor (i.e. 1-NN) with a set of examples.
+     * @param examples The examples to add to the algorithm's "memory"
+     */
     public kNN(ArrayList<Window> examples) {
         trainedExamples.addAll(examples);
     }
 
+    /**
+     * Initializes the scheme with a set of examples and sets k=numClosest
+     * @param examples The examples to add to the algorithm's "memory"
+     * @param numClosest The number of neighbors to consider when classifying new examples
+     */
     public kNN(ArrayList<Window> examples, int numClosest) {
         trainedExamples.addAll(examples);
         k = numClosest;
     }
 
+    /**
+     * Adds a Window object to the algorithm's "memory"
+     * @param example
+     */
     public void addExample(Window example) {
         trainedExamples.add(example);
+    }
+
+    /**
+     * Classifies a new example according to the data that's already in memory.
+     * @param toClassify The window to classify. It can have a non-null class parameter, as it won't be considered.
+     * @return the class (an integer) as predicted by the k nearest neighbors.
+     */
+    public int classify(Window toClassify) {
+        HashMap<Window, Double> distances = new HashMap<>();
+        for(Window other : trainedExamples) {
+            double distance = FastDTWHelper.getDistance(toClassify, other);
+            distances.put(other, distance);
+        }
+        return calculateMajority(distances);
     }
 
     //This may not be right. Review
@@ -36,10 +71,23 @@ public class kNN {
         return closest;
     }
 
+    /**
+     * Caculates the majority class from the k closest neighbors. In the even of a tie, the votes will be
+     * recounted from the (k-1) closest neighbors. This is the helper function that allows the
+     * calculateMajority(ArrayList) function be recursive.
+     * @param distances A map containing the distance from the example to each Window in memory
+     * @return the class (an integer) as predicted by the majority
+     */
     private int calculateMajority(HashMap<Window, Double> distances) {
         return calculateMajority(getClosest(distances));
     }
 
+    /**
+     * Calculates the majority class
+     * @param closest the closest neighbors, used to determine predicted class. Will recurse (potentially down to k=1)
+     *                if ties continue to happen.
+     * @return the class (an integer) as predicted by the majority.
+     */
     private int calculateMajority(ArrayList<Window> closest) {
         HashMap<Integer, Integer> votes = new HashMap<>();
         boolean isTie = false;
@@ -64,17 +112,6 @@ public class kNN {
             calculateMajority(closest); //Decrease by one and try again
         }
         return predictedClass;
-    }
-
-
-
-    public int classify(Window toClassify) {
-        HashMap<Window, Double> distances = new HashMap<>();
-        for(Window other : trainedExamples) {
-            double distance = FastDTWHelper.getDistance(toClassify, other); //TODO: Calculate distance
-            distances.put(other, distance);
-        }
-        return calculateMajority(distances);
     }
 
     class WindowComparator implements Comparator<Window> {
