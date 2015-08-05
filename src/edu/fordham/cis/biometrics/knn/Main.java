@@ -1,3 +1,5 @@
+package edu.fordham.cis.biometrics.knn;
+
 /**
  * Created by andrew on 8/4/15.
  */

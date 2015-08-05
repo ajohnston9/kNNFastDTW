@@ -1,7 +1,12 @@
+package edu.fordham.cis.biometrics.knn;
+
 import java.util.*;
 
 /**
- * Created by andrew on 8/4/15.
+ * An implementation of the k-Nearest Neighbors machine learning algorithm that uses FastDTW as a distance
+ * metric.
+ * @author Andrew H. Johnston <a href="mailto:ajohnston9@fordham.edu">ajohnston9@fordham.edu</a>
+ * @version 0.01ALPHA
  */
 public class kNN {
 
@@ -66,7 +71,7 @@ public class kNN {
     public int classify(Window toClassify) {
         HashMap<Window, Double> distances = new HashMap<>();
         for(Window other : trainedExamples) {
-            double distance = 0; //TODO: Calculate distance
+            double distance = FastDTWHelper.getDistance(toClassify, other); //TODO: Calculate distance
             distances.put(other, distance);
         }
         return calculateMajority(distances);

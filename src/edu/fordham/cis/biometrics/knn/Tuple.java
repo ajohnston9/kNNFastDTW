@@ -1,15 +1,23 @@
+package edu.fordham.cis.biometrics.knn;
+
 /**
- * Represents a series of t,x,y,z values and a class as determined by some windowing function
+ * Represents a sensor reading in three axes at one point in time. Assumes timestamps are UNIX-style.
  * @author Andrew H. Johnston <a href="mailto:ajohnston9@fordham.edu">ajohnston9@fordham.edu</a>
  * @version 0.01ALPHA
  */
-public class Window {
+public class Tuple {
 
     private long timestamp;
     private float x;
     private float y;
     private float z;
-    private int dmClass;
+
+    public Tuple(long timestamp, float x, float y, float z) {
+        this.timestamp = timestamp;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
     public long getTimestamp() {
         return timestamp;
@@ -41,13 +49,5 @@ public class Window {
 
     public void setZ(float z) {
         this.z = z;
-    }
-
-    public int getDmClass() {
-        return dmClass;
-    }
-
-    public void setDmClass(int dmClass) {
-        this.dmClass = dmClass;
     }
 }
